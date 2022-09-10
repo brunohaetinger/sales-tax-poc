@@ -1,8 +1,11 @@
 {
   "name": "sales-tax-poc",
   "version": "0.0.3",
-  "module": "src/index.js",
+  "module": "src/index.ts",
   "devDependencies": {
     "bun-types": "latest"
+  },
+  "dependencies": {
+    "lowdb": "^3.0.0"
   }
 }
