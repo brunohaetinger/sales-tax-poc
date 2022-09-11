@@ -2,6 +2,9 @@
   "name": "sales-tax-poc",
   "version": "0.0.3",
   "module": "src/index.ts",
+  "scripts": {
+    "start": "bun run nodemon"
+  },
   "devDependencies": {
     "bun-types": "latest"
   },

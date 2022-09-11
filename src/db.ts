@@ -1,4 +1,6 @@
+import { fileURLToPath } from "bun";
 import { Low, JSONFile } from "lowdb";
+import { dirname, join } from "path";
 import Category from "./types/Category.type";
 import Product from "./types/Product.type";
 import ProductPrice from "./types/ProductPrice.type";
@@ -15,7 +17,13 @@ type Data = {
   sales: Sale[];
 };
 
-const adapter = new JSONFile<Data>("db.json");
+const __dirname = dirname(fileURLToPath(new URL(import.meta.url)));    
+const file = join(__dirname, 'db.json')
+const adapter = new JSONFile<Data>(file);
 const db = new Low(adapter);
-
+// db.read().then(()=>{
+//   console.log('READ');
+//   console.log(db.data.products)
+// })
 export default db;
+

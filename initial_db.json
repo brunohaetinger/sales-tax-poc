@@ -112,13 +112,6 @@
       "date": "2022-09-09",
       "state_id": "RS",
       "tax_id": 2
-    },
-    {
-      "id": 2,
-      "product_price_id": 3,
-      "date": "2021-09-11",
-      "state_id": "SC",
-      "tax_id": 4
     }
   ]
 }
