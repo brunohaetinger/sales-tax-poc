@@ -1,5 +1,5 @@
 import db from "../db";
-import Tax from "../types/Tax.type";
+import Tax from "../models/Tax.type";
 
 export const getTaxes = async (): Promise<Tax[]> => {
     await db.read();

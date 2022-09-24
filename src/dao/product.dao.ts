@@ -1,6 +1,6 @@
 import db from "../db";
-import Product from "../types/Product.type";
-import ProductPrice from "../types/ProductPrice.type";
+import Product from "../models/Product.type";
+import ProductPrice from "../models/ProductPrice.type";
 import { getProductsPrices } from "./productPrice.dao";
 
 export const getProducts = async (): Promise<Product[]> => {

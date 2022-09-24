@@ -1,5 +1,5 @@
 import db from "../db";
-import State from "../types/State.type";
+import State from "../models/State.type";
 
 export const getStates = async (): Promise<State[]> => {
     await db.read();

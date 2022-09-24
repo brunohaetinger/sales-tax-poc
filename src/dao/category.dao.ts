@@ -1,6 +1,6 @@
 import db from "../db";
-import Category from "../types/Category.type";
-import Product from "../types/Product.type";
+import Category from "../models/persistence/Category.type";
+import Product from "../models/Product.type";
 import { getProducts } from "./product.dao";
 
 export const getCategories = async (): Promise<Category[]> => {

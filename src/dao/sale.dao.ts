@@ -1,5 +1,5 @@
 import db from "../db";
-import Sale from "../types/Sale.type";
+import Sale from "../models/Sale.type";
 import { getCategoryIdFromProductId } from "./category.dao";
 import { getProductIdFromProdPriceId, getProducts } from "./product.dao";
 import { getProductsPrices } from "./productPrice.dao";

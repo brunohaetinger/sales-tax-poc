@@ -1,12 +1,12 @@
 import { fileURLToPath } from "bun";
 import { Low, JSONFile } from "lowdb";
 import { dirname, join } from "path";
-import Category from "./types/Category.type";
-import Product from "./types/Product.type";
-import ProductPrice from "./types/ProductPrice.type";
-import Sale from "./types/Sale.type";
-import State from "./types/State.type";
-import Tax from "./types/Tax.type";
+import Category from "./models/persistence/Category.type";
+import Product from "./models/persistence/Product.type";
+import ProductPrice from "./models/persistence/ProductPrice.type";
+import Sale from "./models/persistence/Sale.type";
+import State from "./models/persistence/State.type";
+import Tax from "./models/persistence/Tax.type";
 
 type Data = {
   states: State[];

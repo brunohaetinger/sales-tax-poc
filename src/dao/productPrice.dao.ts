@@ -1,5 +1,5 @@
 import db from "../db";
-import ProductPrice from "../types/ProductPrice.type";
+import ProductPrice from "../models/ProductPrice.type";
 
 export const getProductsPrices = async (): Promise<ProductPrice[]> => {
     await db.read();
