@@ -1,12 +1,14 @@
 import { ProductFactory } from "../services/productFactory";
-import { TaxService } from "../services/taxService";
+import { TaxFactory } from "../services/taxFactory";
 import Product from "./Product";
 import State from "./State";
+import Tax from "./Tax";
 
 class Sale {
     product: Product;
     date: string;
     state: State;
+    tax: Tax;
 
     constructor(
         date: string,
@@ -20,6 +22,7 @@ class Sale {
         try{
             const product = ProductFactory.createProduct(model, this.getYear());
             this.product = product;
+            this.tax = TaxFactory.createTax(this.state, this.getYear(), this.product.category);
             return true;
         } catch (err){
             console.error(err)
@@ -34,11 +37,7 @@ class Sale {
     getFullPrice(): number{
         if(!this.product) return 0;
 
-        console.log(`Cat: ${this.product.category.name} --- year: ${this.getYear()} --- state: ${this.state.id}`);
-        const tax = TaxService.getTax(this.product.category, this.getYear(), this.state)
-        console.log('tax >>',tax);
-        
-        const fullPrice = this.product.price * (1 + tax/100);
+        const fullPrice = this.product.price * (1 + this.tax.percentage/100);
         return Number(fullPrice.toFixed(2));
     }
 

@@ -1,14 +1,21 @@
-import Category from "../models/Category";
 import Product from "../models/Product";
-import { productWithPriceMock } from "../tests/mocks/mocks";
+import { CategoryFactory } from "./categoryFactory";
 
 export class ProductFactory {
     static createProduct(model: string, year: number): Product{
-        const productMock = Object.values(productWithPriceMock).find(prod => prod.model === model && prod.year === year);
-        if(!productMock){
-            throw Error("Product model doesn't exist");
+        const category = CategoryFactory.createCategory(model);
+        
+        if(model === "iPhone 12"){
+            const price = year >= 2022 ? 800.5 : 999;
+            return new Product(model, category, price);
         }
-        const category = new Category(productMock.category);
-        return new Product(model, category, productMock.price);
+        if(model === "iPhone 12 Pro Max"){
+            const price = year >= 2022 ? 1000 : 1200;
+            return new Product(model, category, price);
+        }
+        if(model === "Apple Watch 2"){
+            const price = year >= 2022 ? 1000 : 1100;
+            return new Product(model, category, price);
+        }
     }
 }
