@@ -5,7 +5,10 @@ import Tax from "../models/Tax";
 export class TaxFactory {
     static createTax(state: State, year: number, category: Category): Tax{
         let percentage = null;
+        // Specification idea: 
+        //  have a SmartphoneSpec, with method isSatisfiedBy(category){ return category.name === "Smartphone" }
         if(category.name === "Smartphone"){
+            //Have a RSStateSpec, with method isSatisfiedBy(state){ return state.id === "RS" }
             if(state.id === "RS"){
                 percentage = year >= 2022 ? 12 : 10;
             }
