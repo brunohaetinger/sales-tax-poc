@@ -1,14 +1,13 @@
+import { PriceFactory } from "../services/priceFactory";
 import { ProductFactory } from "../services/productFactory";
 import { TaxFactory } from "../services/taxFactory";
-import Product from "./Product";
+import SaleItem from "./SaleItem";
 import State from "./State";
-import Tax from "./Tax";
 
 class Sale {
-    product: Product;
+    items: SaleItem[];
     date: string;
     state: State;
-    tax: Tax;
 
     constructor(
         date: string,
@@ -16,13 +15,16 @@ class Sale {
     ) {
         this.date = date;
         this.state = state;
+        this.items = [];
     }
 
     addProduct(model: string): boolean{
         try{
             const product = ProductFactory.createProduct(model, this.getYear());
-            this.product = product;
-            this.tax = TaxFactory.createTax(this.state, this.getYear(), this.product.category);
+            const price = PriceFactory.createPrice(model, this.getYear());
+            const tax = TaxFactory.createTax(this.state, this.getYear(), product.category);
+            const newItem = new SaleItem(product, price, tax);
+            this.items.push(newItem)
             return true;
         } catch (err){
             console.error(err)
@@ -31,13 +33,13 @@ class Sale {
     }
 
     getPriceWithoutTaxes(): number{
-        return this.product?.price || 0;
+        return this.items.reduce((acc, item) => acc + item.getPriceWithoutTaxes(), 0);
     }
 
     getFullPrice(): number{
-        if(!this.product) return 0;
+        if(!this.items) return 0;
 
-        const fullPrice = this.product.price * (1 + this.tax.percentage/100);
+        const fullPrice = this.items.reduce((acc, item) => acc + item.getFullPrice(), 0);
         return Number(fullPrice.toFixed(2));
     }
 

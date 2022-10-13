@@ -10,7 +10,7 @@ describe("Sales",() => {
     it("should have undefined product", () => {
         const state = StateFactory.createState("RS");
         const sale = new Sale("2022-09-24", state);
-        expect(sale.product).toBe(undefined);
+        expect(sale.items[0]).toBe(undefined);
     })
 
     describe("addProduct", () => {
@@ -18,7 +18,7 @@ describe("Sales",() => {
             const state = StateFactory.createState("RS");
             const sale = new Sale("2022-09-24", state);
             sale.addProduct("iPhone 12")
-            expect(sale.product.model).toBe("iPhone 12");
+            expect(sale.items[0].product.model).toBe("iPhone 12");
         })
     
         it("should fail to add product", () => {
@@ -26,7 +26,7 @@ describe("Sales",() => {
             const sale = new Sale("2022-09-24", state);
             sale.addProduct("Non existing iphone")
             // Currently bun doens't have expect(fn).toThrown()
-            expect(sale.product).toBe(undefined);
+            expect(sale.items[0]).toBe(undefined);
         })
     })
 
