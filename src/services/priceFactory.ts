@@ -1,4 +1,3 @@
-import { IPhone12, IPhone12ProMax, AppleWatch2 } from "../models/Products";
 
 export class PriceFactory {
     static createPrice(model: string, year: number): number{

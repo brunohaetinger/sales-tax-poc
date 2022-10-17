@@ -1,5 +1,6 @@
 import { PriceFactory } from "../services/priceFactory";
-import { ProductFactory } from "../services/productFactory";
+import { ProductBuilder } from "../services/productBuilder";
+import { ProductDirector } from "../services/productDirector";
 import { TaxFactory } from "../services/taxFactory";
 import SaleItem from "./SaleItem";
 import State from "./State";
@@ -20,7 +21,20 @@ class Sale {
 
     addProduct(model: string): boolean{
         try{
-            const product = ProductFactory.createProduct(model, this.getYear());
+            const productBuilder = new ProductBuilder();
+            
+            // TODO: How to define what to make ? What pattern should be responsible ?
+            if(model === "iPhone 12"){
+                ProductDirector.makeIPhone12(productBuilder); 
+            }
+            if(model === "iPhone 12 Pro Max"){
+                ProductDirector.makeIPhone12ProMax(productBuilder); 
+            }
+            if(model === "Apple Watch 2"){
+                ProductDirector.makeAppleWatch2(productBuilder); 
+            }
+            
+            const product = productBuilder.build();
             const price = PriceFactory.createPrice(model, this.getYear());
             const tax = TaxFactory.createTax(this.state, this.getYear(), product.category);
             const newItem = new SaleItem(product, price, tax);
