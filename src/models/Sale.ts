@@ -1,6 +1,6 @@
 import { PriceFactory } from "../services/priceFactory";
 import { ProductFactory } from "../services/productFactory";
-import { TaxFactory } from "../services/taxFactory";
+import { TaxService } from "../services/taxService";
 import SaleItem from "./SaleItem";
 import State from "./State";
 
@@ -22,7 +22,7 @@ class Sale {
         try{
             const product = ProductFactory.createProduct(model, this.getYear());
             const price = PriceFactory.createPrice(model, this.getYear());
-            const tax = TaxFactory.createTax(this.state, this.getYear(), product.category);
+            const tax = TaxService.getTax(this.state, this.getYear(), product.category);
             const newItem = new SaleItem(product, price, tax);
             this.items.push(newItem)
             return true;
