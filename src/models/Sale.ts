@@ -1,5 +1,5 @@
-import { PriceFactory } from "../services/priceFactory";
 import { ProductFactory } from "../services/productFactory";
+import { StateFactory } from "../services/stateFactory";
 import { TaxService } from "../services/taxService";
 import SaleItem from "./SaleItem";
 import State from "./State";
@@ -11,18 +11,18 @@ class Sale {
 
     constructor(
         date: string,
-        state: State,
+        stateId: string,
     ) {
         this.date = date;
-        this.state = state;
+        this.state = StateFactory.createState(stateId, this.getYear());
         this.items = [];
     }
 
     addProduct(model: string): boolean{
         try{
-            const product = ProductFactory.createProduct(model, this.getYear());
-            const price = PriceFactory.createPrice(model, this.getYear());
+            const product = ProductFactory.createProduct(model);
             const tax = TaxService.getTax(this.state, this.getYear(), product.category);
+            const price = product.getPrice(this.getYear());
             const newItem = new SaleItem(product, price, tax);
             this.items.push(newItem)
             return true;

@@ -1,17 +1,25 @@
-import { StateTax } from "../../types/StateTax.type";
+import { StateSpecification } from "../../specifications/State/StateSpecification";
 import { TaxByCategory } from "../../types/TaxByCategory.type";
+import Category from "../Category";
 import RS from "./RS";
 
-class RS2022 extends RS  implements StateTax{
-    tax: TaxByCategory;
-    year: number;
+class RS2022 extends RS  implements StateSpecification{
+    private tax: TaxByCategory;
 
     constructor() {
         super();
-        this.year = 2022;
         this.tax = {
-            1: 12,
+            "Smartphone": 12,
+            "Wearable": 30,
         };
+    }
+
+    isSatisfiedBy(): boolean {
+        return this.id === "RS"
+    }
+    
+    getTax(category: Category): number {
+        return this.tax[category.name];
     }
 }
 

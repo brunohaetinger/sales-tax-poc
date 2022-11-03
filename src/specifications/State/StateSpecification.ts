@@ -1,5 +1,6 @@
-import { StateTax } from "../../types/StateTax.type";
+import Category from "../../models/Category";
 
 export interface StateSpecification {
-    isSatisfiedBy(state: StateTax): boolean;
+    isSatisfiedBy(): boolean;
+    getTax(category: Category): number;
 }

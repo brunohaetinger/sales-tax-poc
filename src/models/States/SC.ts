@@ -1,6 +1,6 @@
 import State from "../State";
 
-class SC extends State {
+abstract class SC extends State {
 
     constructor() {
         super("SC",  "Santa Catarina");
